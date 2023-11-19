@@ -1,0 +1,17 @@
+asgiref==3.4.1
+blinker==1.4
+cffi==1.15.1
+click==8.0.4
+colorama==0.4.5
+cryptography==40.0.2
+Django==3.2.23
+dnspython==2.2.1
+Flask==2.0.3
+gunicorn==21.2.0
+packaging==21.3
+pymongo==4.1.1
+python-decouple==3.8
+tzdata==2023.3
+Werkzeug==2.0.3
+Fernet==1.0.1
+google-api-python-client==2.24.0

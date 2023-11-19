@@ -1,0 +1,45 @@
+FROM ubuntu:latest
+
+RUN apt update
+RUN apt install -y python3-pip
+RUN apt install -y python3-dev
+RUN pip install --upgrade pip
+RUN apt install -y libpq-dev
+RUN apt install -y gcc
+RUN apt install -y software-properties-common
+RUN add-apt-repository universe
+RUN apt update
+RUN apt install -y nginx supervisor openssl wget
+RUN pip install uwsgi
+
+EXPOSE 80
+EXPOSE 443
+EXPOSE 8000
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN adduser botnet-api-user
+RUN useradd --no-create-home nginx
+
+RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-available/default
+COPY ./dockerConfig/nginx.conf /etc/nginx/
+COPY ./dockerConfig/BotnetAPI.conf /etc/nginx/conf.d/
+COPY ./dockerConfig/uwsgi.ini /etc/uwsgi/
+COPY ./dockerConfig/supervisord.conf /etc/
+
+
+RUN mkdir -p /home/flask_app/BotnetAPI
+RUN mkdir -p /home/flask_app/BotnetAPI/static
+RUN mkdir -p /home/flask_app/BotnetAPI/downloads
+WORKDIR /home/flask_app/BotnetAPI
+COPY ./secrets ./secrets
+COPY ./certificates ./certificates
+COPY ./downloads ./downloads
+
+COPY BotnetAPI.py wsgi.py ./
+
+RUN chown -R botnet-api-user:botnet-api-user ./
+
+CMD ["/usr/bin/supervisord"]
