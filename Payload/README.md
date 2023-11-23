@@ -7,3 +7,4 @@ Use it as follows:
         + mov eax, [fs:ecx + 0x30]
  - nasm -g -f win32 _assembly.asm -o _assembly.o
  - ld -g -mi386pe _assembly.o -o _assembly.exe
+./

