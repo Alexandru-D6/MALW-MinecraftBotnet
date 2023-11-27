@@ -1,0 +1,27 @@
+import requests
+import subprocess
+
+# URL of the API server
+API_URL = "http://localhost:5000"
+
+def download_and_execute():
+    # Download the file
+    response = requests.get(f"{API_URL}/download")
+    filename = 'downloaded_file.txt'
+
+    with open(filename, 'wb') as file:
+        file.write(response.content)
+
+    # Execute the file (safely and benignly)
+    # For a text file, open it
+    with open(filename, 'r') as file:
+        output = file.read()
+
+    return output
+
+def report_result(result):
+    requests.post(f"{API_URL}/report", json={"result": result})
+
+if __name__ == "__main__":
+    result = download_and_execute()
+    report_result(result)
