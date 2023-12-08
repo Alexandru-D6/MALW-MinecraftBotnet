@@ -105,8 +105,8 @@ sub dword [esp + 3], 0x23
 push 0x616f6c6e
 push 0x776f446e
 push 0x69614d2f
-push 0x312e302e
-push 0x302e3732
+push 0x39362e32
+push 0x2e302e30
 push 0x312f2f3a
 push 0x70747468
 push esp
