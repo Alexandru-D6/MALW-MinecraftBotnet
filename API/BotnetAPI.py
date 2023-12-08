@@ -53,19 +53,17 @@ def getMalware():
 @app.route('/task1', methods=['GET'])
 def getTask1():
     #add path from static folder
-    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+    return send_file(os.path.join(DOWNLOAD_PATH, "times.exe"))
 
 @app.route('/task2', methods=['GET'])
 def getTask2():
     #add path from static folder
-
-    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+    return send_file(os.path.join(DOWNLOAD_PATH, "times.exe"))
 
 @app.route('/task3', methods=['GET'])
 def getTask3():
     #add path from static folder
-
-    return send_file(os.path.join(DOWNLOAD_PATH, "malware.txt"))
+    return send_file(os.path.join(DOWNLOAD_PATH, "times.exe"))
 
 @app.route('/agent', methods=['POST'])
 def report_result():
@@ -99,17 +97,21 @@ def reporting_for_duty():
         agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "working", "task": current_task}
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
-        return current_task
+        print(current_task)
+        return {"url": current_task}
     elif agents_dict[agent_ip]['status'] != "working":
         agents_dict[agent_ip]['status'] = "working"
         agents_dict[agent_ip]['task'] = current_task
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
-        return current_task
+        print(current_task)
+        return {"url": current_task}
     else:
-        return "Keep working grunt >:("
+        return {"error": "Keep working grunt >:("}
 
-
+@app.route('/agent/status', methods=['GET'])
+def get_agent_status():
+    return agents_dict
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=80)

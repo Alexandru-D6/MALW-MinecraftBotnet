@@ -9,3 +9,4 @@ def contador(duration=15):
         _ = [os.urandom(1024) for _ in range(1000)]
 
 contador(15)
+print("345.345")
