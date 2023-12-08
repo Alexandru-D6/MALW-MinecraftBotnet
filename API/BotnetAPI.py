@@ -79,6 +79,7 @@ def report_result():
     else:
         agents_dict[agent_ip]['status'] = "online"
         agents_dict[agent_ip]['task'] = ""
+        print(request.json['result'])
 
     return "Thank you"
 
@@ -97,14 +98,12 @@ def reporting_for_duty():
         agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "working", "task": current_task}
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
-        print(current_task)
         return {"url": current_task}
     elif agents_dict[agent_ip]['status'] != "working":
         agents_dict[agent_ip]['status'] = "working"
         agents_dict[agent_ip]['task'] = current_task
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
-        print(current_task)
         return {"url": current_task}
     else:
         return {"error": "Keep working grunt >:("}
