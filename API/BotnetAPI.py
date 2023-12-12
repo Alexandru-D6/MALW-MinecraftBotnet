@@ -78,11 +78,12 @@ def report_result():
     current_time = datetime.datetime.now()
 
     if agent_ip not in agents_dict:
-        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "online", "task": ""}
+        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "online", "task": "", "results": [request.json['result']]}
         #print(agents_dict)
     else:
         agents_dict[agent_ip]['status'] = "online"
         agents_dict[agent_ip]['task'] = ""
+        agents_dict[agent_ip]['results'].append(request.json['result'])
         print(request.json['result'])
 
     return "Thank you"
@@ -99,18 +100,16 @@ def reporting_for_duty():
     current_task = min(tasks, key=tasks.get) #gives the key with the lowest count
 
     if agent_ip not in agents_dict:
-        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port,"status": "working", "task": current_task}
+        agents_dict[agent_ip] = {"ip": agent_ip , "user": agent_user, "last_connected": current_time, "port": port, "status": "working", "task": current_task, "results": list()}
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
         return {"url": current_task}
-    elif agents_dict[agent_ip]['status'] != "working":
+    else:
         agents_dict[agent_ip]['status'] = "working"
         agents_dict[agent_ip]['task'] = current_task
 
         tasks[current_task] += 1 # increase the count of the task since an agent is working on it
         return {"url": current_task}
-    else:
-        return {"error": "Keep working grunt >:("}
 
 @app.route('/agent/status', methods=['GET'])
 def get_agent_status():
