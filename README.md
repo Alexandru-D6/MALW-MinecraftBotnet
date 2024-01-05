@@ -9,10 +9,10 @@ MinecraftBotnet is a project develop to create an automated botnet which propaga
 
 This project was divided in 5 sections that focuses in different aspects of the botnet guts.
 
-1. [API](/API/): Simple webserver API which will provide all available files to be download and also shedule each machine, inside the botnet, to execute the desire tasks.
-1. [InfectPE](/InfectPE/): This folder contains a self-version program which allows to inject shellcode into any executable via creating a new section. Original version [InfectPE](https://github.com/secrary/InfectPE).
+1. [API](/API/): Simple webserver API which will provide all available files to be downloaded and shedule each machine, inside the botnet, to execute the desired tasks.
+1. [InfectPE](/InfectPE/): This folder contains a self-version program which allows to inject shellcode into any executable via the creation of a new section. Original version [InfectPE](https://github.com/secrary/InfectPE).
 1. [Malware](/Malware/): Main program that executes in the victim's computer.
-1. [Payload](/Payload/): The shellcode script that will be injected into the executable and another c++ script, that will be downloaded by the shellcode, in charge of setting up the malware in victim's computer.
+1. [Payload](/Payload/): The shellcode script that will be injected into the executable, and another c++ script that will be downloaded by the shellcode, in charge of setting up the malware in victim's computer.
 1. [Scripts](/Scripts/): This folder contains the task that is executed by the malware.
 
 ## Intruction:
@@ -33,7 +33,7 @@ Payload (shellcode):
 * `$ C:/MinGW/bin/ld.exe -g -mi386pe _assembly.o -o _assembly.exe`
 >
 * `$ objdump -d _assembly.exe`
-  * ¡Gitbash required or any alternative! *See tmp.txt file to see the desire output
+  * ¡Gitbash required or any alternative! *See tmp.txt file to see the desired output
 * Paste the .text section inside tmp.txt file
 * `$ python dumpShellcode.py tmp.txt`
 
@@ -41,10 +41,10 @@ Payload (shellcode):
 > You can use any other alternative to ouput the shellcode from an excutable.
 
 > [!WARNING]
-> We have encounter several errors with the gcc distribution, to compile the MainDownloader we have used the `LLVM` distribution. However, for the shellcode part we have used `MinGW` distribution.
+> We have encountered several errors with the gcc distribution. To compile the MainDownloader, we have used the `LLVM` distribution; however, for the shellcode part we have used `MinGW` distribution.
 
 > [!IMPORTANT]
-> You will need gcc, gcc for mutiplatform (32 bits) and nasm installed.
+> You will need gcc, gcc for mutiplatform (32 bits), and nasm installed.
 
 ### Compiling the tasks
 * `$ cd /Scripts`
@@ -73,6 +73,8 @@ Payload (shellcode):
 
 ## Running the Botnet server:
 Before starting the server, remember to change the IP address depending on how you setup the network or the server itself (you could use directly `0.0.0.0:80`) inside `/API/BotnetAPI.py`.
+> [!IMPORTANT]
+> Keep in mind, that changing the IP implies changing the following files: payload.cpp, MainDownloader.c, botScript.py, and BotnetAPI.py. In addition, changing the payload and the MainDownloader involves translating to asm, compiling, and replacing the shellcode string again in infectPE.cpp. 
 
 * `$ cd /API`
 * `$ pip install -r requirements.txt`
@@ -82,7 +84,7 @@ Before starting the server, remember to change the IP address depending on how y
 > You will need python installed.
 
 > [!TIP]
-> Theoretically, you can deploy to docker this API. However, it was not tested for this project.
+> Theoretically, you can deploy this API to docker; however, it was not tested for this project.
 
 ## Considerations
 
