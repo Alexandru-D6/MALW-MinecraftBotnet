@@ -1,17 +1,14 @@
 # MALW-MinecraftBotnet
 
-Intruction:
+MinecraftBotnet is a project develop to create an automated botnet which propagate though phishing emails. The target audience would be unexperienced people that plays Minecraft. This project was develop as Assignment durint the Malware's subject of the Cybersecurity Master Degree (UPC).
 
-    *** Docker initialization ***
+> [!IMPORTANT]
+> **DISCLAIMER: This project was done for educational purposes. We are not responsible for the use you give it.**
 
-        + Useful commands for dockder
-    - docker ps -a (Show running containers)
-    - docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container-id>
+## Structure
 
-        + Botnet API deploy (every time you want to udpate the docker image)
-    - 'cd ./API'
-    - 'docker build -t botnet-api .'
-    - 'docker stop botnet-api' (optional)
-    - 'docker rm botnet-api' (optional)
-    - 'docker run --name botnet-api -p 5000:5000 -d botnet-api'
-    - 'docker start/stop botnet-api'
+This project was divided in 5 sections that focuses in different aspects of the botnet guts.
+
+1. [API](/API/)
+
+## Intruction:
