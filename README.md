@@ -9,10 +9,10 @@ MinecraftBotnet is a project develop to create an automated botnet which propaga
 
 This project was divided in 5 sections that focuses in different aspects of the botnet guts.
 
-1. [API](/API/): Simple webserver API which will provide all available files to be download and also shedule each machine, inside the botnet, to execute the desire tasks.
-1. [InfectPE](/InfectPE/): This folder contains a self-version program which allows to inject shellcode into any executable via creating a new section. Original version [InfectPE](https://github.com/secrary/InfectPE).
+1. [API](/API/): Simple webserver API which will provide all available files to be downloaded and schedule each machine, inside the botnet, to execute the desired tasks.
+1. [InfectPE](/InfectPE/): This folder contains a self-version program which allows to inject shellcode into any executable via the creation of a new section. Original version [InfectPE](https://github.com/secrary/InfectPE).
 1. [Malware](/Malware/): Main program that executes in the victim's computer.
-1. [Payload](/Payload/): The shellcode script that will be injected into the executable and another c++ script, that will be downloaded by the shellcode, in charge of setting up the malware in victim's computer.
+1. [Payload](/Payload/): The shellcode script that will be injected into the executable, and another c++ script that will be downloaded by the shellcode, in charge of setting up the malware in victim's computer.
 1. [Scripts](/Scripts/): This folder contains the task that is executed by the malware.
 
 ## Intruction:
