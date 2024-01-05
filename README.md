@@ -19,9 +19,11 @@ This project was divided in 5 sections that focuses in different aspects of the 
 
 ### Compiling shellcode and mainDownloader
 Maindownloader:
-> `$ cd /Payload`
-> `$ gcc -m32 MainDownloader.c -o MainDownloader.exe -lurlmon`
-> Now, you can place the generated executable inside [API downloads folder](/API/downloads).
+
+- `$ cd /Payload`
+- `$ gcc -m32 MainDownloader.c -o MainDownloader.exe -lurlmon`
+- Now, you can place the generated executable inside [API downloads folder](/API/downloads).
+
 
 Payload (shellcode):
 > `$ cd /Payload`
